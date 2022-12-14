@@ -1,10 +1,11 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useRef } from 'react';
+import { IonButton, IonButtons, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { useRef, useState } from 'react';
 
 import './Page.css';
 
 const Page: React.FC = () => {
   const username = useRef<HTMLIonInputElement>(null);
+  const [user, setUser] = useState<any[]>([{}]);
   const findUser = async () => {
     console.log(username.current?.value)
     const inf = await fetch("https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + username.current?.value + "?api_key=" + process.env.REACT_APP_RIOT_API, {
@@ -15,7 +16,6 @@ const Page: React.FC = () => {
         "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
       }
     }).then(res => res.json())
-    console.log(inf)
 
     const res = await fetch("https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/" + inf.id + "?api_key=" + process.env.REACT_APP_RIOT_API, {
       method: "GET",
@@ -26,8 +26,7 @@ const Page: React.FC = () => {
       }
     }).then(res => res.json())
 
-    console.log(res)
-
+    setUser(res);
 
   }
   return (
@@ -51,7 +50,7 @@ const Page: React.FC = () => {
           <IonInput ref={username} placeholder='소환사 이름'/>
         </IonItem><br/>
         <IonButton expand={"block"} onClick={findUser}>검색</IonButton>
-        
+        <br/>
       </IonContent>
     </IonPage>
   );
