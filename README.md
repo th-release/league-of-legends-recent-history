@@ -1,6 +1,6 @@
 # league-of-legends-recent-history
 
-How To Get API KEY? 
+## How To Get API KEY? 
 
 - https://developer.riotgames.com/
 - 해당 사이트에서 로그인을 합니다.
