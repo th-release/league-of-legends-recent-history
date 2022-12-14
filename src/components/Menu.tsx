@@ -37,8 +37,8 @@ const Menu: React.FC = () => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>Dev :</IonListHeader>
+          <IonNote>th.release.cth@gmail.com</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
@@ -50,6 +50,8 @@ const Menu: React.FC = () => {
             );
           })}
         </IonList>
+        <br/>
+        <IonNote>riot API를 사용하였습니다.</IonNote>
       </IonContent>
     </IonMenu>
   );
