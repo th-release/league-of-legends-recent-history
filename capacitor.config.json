@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "league of legends recent history",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}

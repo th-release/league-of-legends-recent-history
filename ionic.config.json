@@ -1,0 +1,8 @@
+{
+  "name": "league of legends recent history",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "8254c768"
+}
