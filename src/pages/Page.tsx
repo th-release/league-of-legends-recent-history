@@ -1,11 +1,11 @@
-import { IonButton, IonButtons, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useRef, useState } from 'react';
 
 import './Page.css';
 
 const Page: React.FC = () => {
   const username = useRef<HTMLIonInputElement>(null);
-  const [user, setUser] = useState<any[]>([{}]);
+  const [user, setUser] = useState<any[]>([]);
   const findUser = async () => {
     console.log(username.current?.value)
     const inf = await fetch("https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + username.current?.value + "?api_key=" + process.env.REACT_APP_RIOT_API, {
@@ -51,6 +51,31 @@ const Page: React.FC = () => {
         </IonItem><br/>
         <IonButton expand={"block"} onClick={findUser}>검색</IonButton>
         <br/>
+
+        {Object.values(user).map((user) => (
+          <IonCard>
+            <IonCardHeader>
+              <IonCardTitle>{user.queueType}</IonCardTitle>
+              <IonCardSubtitle>{user.summonerName}</IonCardSubtitle>
+            </IonCardHeader>
+            <IonCardContent>
+              <IonList>
+                <IonItem>
+                  <IonLabel>소환사의 티어: {user.tier}&nbsp;{user.rank}</IonLabel>
+                </IonItem>
+                <IonItem>
+                  <IonLabel>소환사의 점수: {user.leaguePoints}&nbsp;LP</IonLabel>
+                </IonItem>
+                <IonItem>
+                  <IonLabel>소환사의 전적: {user.wins}승&nbsp;{user.losses}패</IonLabel>
+                </IonItem>
+                <IonItem>
+                  <IonLabel>승률: {((user.wins)/(user.wins+user.losses)*100).toFixed(2)}%</IonLabel>
+                </IonItem>
+              </IonList>
+            </IonCardContent>
+          </IonCard>
+        ))}
       </IonContent>
     </IonPage>
   );
